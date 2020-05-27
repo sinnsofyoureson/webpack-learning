@@ -1,4 +1,4 @@
-class ComponentService {
+export default class ComponentService {
   constructor() {
     this.numberOneInput = document.getElementById("numberOne");
     this.numberTwoInput = document.getElementById("numberTwo");
@@ -7,14 +7,14 @@ class ComponentService {
   }
 
   getInputs() {
-    return [this.numberOneInput.nodeValue, this.numberTwoInput.value]
+    return [this.numberOneInput.nodeValue, this.numberTwoInput.value];
   }
 
   setResult(str) {
-    this.resultDiv.innerText = str
+    this.resultDiv.innerText = str;
   }
 
   onClick(cb) {
-    this.addValuesButton.addEventListener('click', cb)
+    this.addValuesButton.addEventListener("click", cb);
   }
 }
