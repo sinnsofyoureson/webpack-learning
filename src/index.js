@@ -1,9 +1,42 @@
 import './main.scss';
 import { init } from './app';
-import AlertService from "./app/alert-service";
-import ComponentService from "./app/component-service";
 
-const alertService = new AlertService();
-const componentService = new ComponentService();
+const getAlertService = async () => {
+  let alertService;
 
-init(alertService, componentService);
+  try {
+    const AlertService = await import(
+      /* 
+        webpackChunkName: "AlertService"
+        webpackPrefetch: true
+      */
+      "./app/alert-service"
+    );
+    alertService = new AlertService();
+  } catch (e) {
+    console.error("Error occured while fetching Alert Service", e);
+  }
+
+  return alertService;
+};
+
+const getComponentService = async () => {
+  let componentService;
+
+  try {
+    const ComponentService = await import(
+      /*
+        webpackChunkName: "ComponentService"
+        webpackPreload: true
+      */
+      "./app/component-service"
+    );
+    componentService = new ComponentService();
+  } catch (e) {
+    console.error("Error occured while fetching Component Service", e);
+  }
+
+  return componentService;
+};
+
+init(getAlertService, getComponentService);

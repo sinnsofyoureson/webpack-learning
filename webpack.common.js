@@ -1,11 +1,10 @@
 module.exports = {
-  entry: { 
-    main: "./src/index.js",
-    vendor: "./src/vendor.js",
+  entry: {
+    index: "./src/index.js",
   },
   module: {
     rules: [
-      { 
+      {
         test: /\.html$/,
         use: ["html-loader"],
       },
@@ -18,6 +17,11 @@ module.exports = {
             outputPath: "assets",
           },
         },
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: "babel-loader",
       },
     ],
   },
